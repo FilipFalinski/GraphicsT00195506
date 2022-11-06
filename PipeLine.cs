@@ -85,70 +85,87 @@ public class PipeLine : MonoBehaviour
 
 
 
-        /*   print_matrix(rotation_matrix);
-           print_verts(image_after_rotation);
-           print_matrix(scaleMatrix);
-           print_verts(imageAfterScale);
-           print_matrix(translationMatrix);
-           print_verts(imageAfterTranslation);
-           print_matrix(transformMatrix);
-           print_verts(imageAfterTransform);
-           print_matrix(viewMatrix);
-           print_verts(imageAfterViewing);
-           print(everythingMatrix);
-           print_verts(imageAfterEverything);
-           print_matrix(ProjectionMatrix);
-           print_verts(imageAfterProjection);
-           print_file2d(projectionByHand); */
+     /*   print_matrix(rotation_matrix);
+        print_verts(image_after_rotation);
+        print_matrix(scaleMatrix);
+        print_verts(imageAfterScale);
+        print_matrix(translationMatrix);
+        print_verts(imageAfterTranslation);
+        print_matrix(transformMatrix);
+        print_verts(imageAfterTransform);
+        print_matrix(viewMatrix);
+        print_verts(imageAfterViewing);
+        print(everythingMatrix);
+        print_verts(imageAfterEverything);
+        print_matrix(ProjectionMatrix);
+        print_verts(imageAfterProjection);
+        print_file2d(projectionByHand); */
 
-
-
-        outcode start = new outcode(new Vector2(0.1f, 1.2f));
-
-        outcode end = new outcode(new Vector2(0.6f, -1.2f));
 
     }
 
-    bool line_clip(ref Vector2 start, ref Vector2 end)
+    private bool LineClip(ref Vector2 start, ref Vector2 end)
     {
-        outcode startOutcode = new outcode(start);
-        outcode endOutcode = new outcode(end);
+        Outcode startOutCode = new(start);
+        Outcode endOutCode = new(end);
+        Outcode inScreen = new();
 
-        outcode inScreen = new outcode();
-            if ((startOutcode + endOutcode) == inScreen) 
-            return true;
-        if ((startOutcode * endOutcode) != inScreen)
-            return false;
-
-    }
-
-
-    List<Vector2> intersectEdge(Vector2 start, Vector2 end, outcode pointOutcode)
-    {
-        float m = (end.y - start.y) / (end.x - start.x);//slope
-        List<Vector2> intersections = new List<Vector2>();
-        if(pointOutcode.up)
+        if ((startOutCode + endOutCode) == inScreen)
         {
-            intersections.Add(new Vector2( start.x  + (1/m)*(1 - start.y),1));
+            return true;
+        }
+        if ((startOutCode * endOutCode) != inScreen)
+        {
+            return false;
         }
 
+        if (startOutCode == inScreen)
+        {
+            return LineClip(ref end, ref start);
+        }
+
+        List<Vector2> points = IntersectEdge(start, end, startOutCode);
+        foreach (Vector2 v in points)
+        {
+            Outcode pointOutcode = new(v);
+            if (pointOutcode == inScreen)
+            {
+                start = v;
+                return LineClip(ref start, ref end);
+            }
+        }
+
+        return false;
+    }
+
+    private List<Vector2> IntersectEdge(Vector2 start, Vector2 end, Outcode pointOutcode)
+    {
+        float m = (end.y - start.y) / (end.x - start.x);
+        List<Vector2> intersections = new();
+
+
+        if (pointOutcode.up)
+        {
+            intersections.Add(new(start.x + (1 / m) * (1 - start.y), 1));
+        }
         if (pointOutcode.down)
         {
-            intersections.Add(new Vector2(start.x + (1 / m) * (-1 - start.y), -1));
+            intersections.Add(new(start.x + (1 / m) * (-1 - start.y), -1));
         }
-
         if (pointOutcode.left)
         {
-            intersections.Add(new Vector2 (-1, start.y + m *(-1 - start.x)));
+            intersections.Add(new(-1, start.y + m * (-1 - start.x)));
         }
-
         if (pointOutcode.right)
         {
-            intersections.Add(new Vector2(1, start.y + m * (1 - start.x)));
+            intersections.Add(new(1, start.y + m * (1 - start.x)));
         }
+
         return intersections;
     }
- 
+
+
+
     private List<Vector3> get_image(List<Vector3> list_verts, Matrix4x4 transform_matrix)
     {
         List<Vector3> img_verts = new List<Vector3>();
