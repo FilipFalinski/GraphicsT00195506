@@ -129,43 +129,44 @@ public class model : MonoBehaviour
         vertices.Add(new Vector3(-2, 3, -0.5f));
         vertices.Add(new Vector3(3, 3, -0.5f));//f5
         vertices.Add(new Vector3(2, 2, -0.5f));
+
+        
     }
 
     private void AddFaces()
     {
         // Front
-        faces.Add(new Vector3Int(0, 6, 8));//f0
-        faces.Add(new Vector3Int(1, 6, 0));//f1
+        faces.Add(new Vector3Int(0, 8, 6));//f0
+        faces.Add(new Vector3Int(1, 6, 8));//f1
 
-        faces.Add(new Vector3Int(4, 2, 3));//f2
-        faces.Add(new Vector3Int(3, 4, 5));//f3
+        faces.Add(new Vector3Int(4, 5, 3));//f2
+        faces.Add(new Vector3Int(3, 2, 4));//f3
 
-        faces.Add(new Vector3Int(8, 7, 6));//f4
-        faces.Add(new Vector3Int(8, 9, 7));//f5
+        faces.Add(new Vector3Int(8, 9, 7));//f4
+        faces.Add(new Vector3Int(7, 6, 8));//f5
 
         //back
-        faces.Add(new Vector3Int(16, 10, 18));
-        faces.Add(new Vector3Int(11, 16, 10));
+        faces.Add(new Vector3Int(16, 18, 10));
+        faces.Add(new Vector3Int(10, 16, 11));
 
-       faces.Add(new Vector3Int(13, 14, 12));
-        faces.Add(new Vector3Int(13, 15, 14));
+       faces.Add(new Vector3Int(12, 13, 14));
+        faces.Add(new Vector3Int(14, 15, 13));
 
-        faces.Add(new Vector3Int(16, 18, 17));
+        faces.Add(new Vector3Int(16, 17, 18));
         faces.Add(new Vector3Int(19, 17, 18));
         
         //left
-        faces.Add(new Vector3Int(10, 18, 8));
-        faces.Add(new Vector3Int(8, 10, 0));
+        faces.Add(new Vector3Int(0, 18, 8));
+        faces.Add(new Vector3Int(10, 8, 0));
 
         //right
-        faces.Add(new Vector3Int(1, 2, 11));
-        faces.Add(new Vector3Int(12, 2, 11));
-        faces.Add(new Vector3Int(3, 5, 13));
-        faces.Add(new Vector3Int(15, 5, 13));
-        faces.Add(new Vector3Int(4, 14, 6));
-        faces.Add(new Vector3Int(16, 14, 6));
-        faces.Add(new Vector3Int(7, 17, 19));
-        faces.Add(new Vector3Int(19, 9, 17));
+        faces.Add(new Vector3Int(1,6,11));
+        faces.Add(new Vector3Int(6,16,11));
+        faces.Add(new Vector3Int(7,19,9));
+        faces.Add(new Vector3Int(19,17,9));
+        faces.Add(new Vector3Int(3,13,5));
+        faces.Add(new Vector3Int(5,15,13));
+       
 
         //top
         faces.Add(new Vector3Int(9, 8, 19));
@@ -173,15 +174,15 @@ public class model : MonoBehaviour
 
         //bottom
         faces.Add(new Vector3Int(0, 10, 1));
-        faces.Add(new Vector3Int(11, 1, 0));
-        faces.Add(new Vector3Int(2, 3, 12));
-        faces.Add(new Vector3Int(13, 3, 12));
-        faces.Add(new Vector3Int(5, 3, 15));
-        faces.Add(new Vector3Int(13, 3, 15));
+        faces.Add(new Vector3Int(1, 11, 10));
+        faces.Add(new Vector3Int(5,4,15));
+        faces.Add(new Vector3Int(4,14,15));
+        faces.Add(new Vector3Int(9,8,18));
+        faces.Add(new Vector3Int(9,19,8));
         faces.Add(new Vector3Int(6, 7, 17));
-        faces.Add(new Vector3Int(16, 6, 17));
-        faces.Add(new Vector3Int(7, 9, 19));
-        faces.Add(new Vector3Int(17, 7, 19));
+        faces.Add(new Vector3Int(16, 6, 7));
+        faces.Add(new Vector3Int(2,3,12));
+        faces.Add(new Vector3Int(2,13,3));
         
 
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Outcode : MonoBehaviour
 {
-    bool up, down, left, right;
+    public bool up, down, left, right;
 
     public Outcode(Vector2 p)
     {
